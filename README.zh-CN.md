@@ -4,7 +4,8 @@
 
 一个让 **[YouTube](https://www.youtube.com/)** 默认观看页面更沉浸的 **Tampermonkey** 脚本：
 
-- 在 **视频区域**按 **V 键** 或 **鼠标中键** 呼出/隐藏 **右侧推荐抽屉**
+- 按 **V 键** 呼出/隐藏 **右侧推荐抽屉**
+- 在 **视频区域**按 **鼠标中键** 呼出/隐藏 **右侧推荐抽屉**
 - **主视频居中** 并配合 **淡入动画**，减少布局跳动
 - 侧栏采用 **从左到右 透明 → 主题背景色** 的渐变（随深/浅色）
 - 隐藏部分 **全屏快捷操作** 浮层，减少遮挡
@@ -15,17 +16,14 @@
 
 ## 安装
 
-1) 安装浏览器扩展 **Tampermonkey**：<https://www.tampermonkey.net/>  
-2) 打开以下链接并确认安装（同时作为自动更新地址）：
-
-**安装 / 自动更新地址：**  
-https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js
+1) 安装浏览器扩展 ***[Tampermonkey](https://www.tampermonkey.net/)**
+2) 打开**[这个链接](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)**并确认安装（同时作为自动更新地址）：
 
 ---
 
 ## 功能
 
-- **V 键 / 中键** 切换右侧抽屉（仅普通/非影院模式）
+- **V 键 / 中键** 切换右侧抽屉（仅横屏/非影院模式）
 - 主视频 **居中** + **淡入动画**
 - 侧栏 **渐变背景**（随 YouTube 深/浅色主题）
 - 隐藏全屏快捷操作（如 `ytp-fullscreen-quick-actions`）
@@ -65,8 +63,7 @@ https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtu
 
 ## 已知限制
 
-- 影院模式与竖屏布局不在本脚本范围  
-- 全屏“上滑呼出推荐”为 **YouTube 原生** 行为
+- 影院模式与竖屏布局不在本脚本范围
 
 ---
 
