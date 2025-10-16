@@ -2,7 +2,14 @@
 
 **[English](README.md)** · **[简体中文](README.zh-CN.md)** · **[繁體中文](README.zh-TW.md)** · **[日本語](README.ja.md)**
 
-一款輕量的 Tampermonkey 使用者腳本，讓 YouTube 預設的觀看頁更沉浸，  **幫助你專注於內容。**
+<p align="center">
+  <img src="./example.png"
+       alt="YouTube Immersive Player – demo"
+       width="800"
+       style="max-width:100%; height:auto;">
+  <br>
+  <em>一款輕量的 Tampermonkey 使用者腳本，讓 YouTube 預設的觀看頁更沉浸，幫助你專注於內容。</em>
+</p>
 
 ### 功能特性
 
