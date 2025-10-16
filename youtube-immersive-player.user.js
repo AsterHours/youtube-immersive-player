@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         YouTube沉浸式播放器、减少UI阻挡 | YouTube Immersive Player (Reduce UI Clutter)
-// @namespace    https://yourdomain.example
+// @name         YouTube Immersive Player  |  YouTube沉浸式播放器
+// @namespace    https://github.com/AsterHours/youtube-immersive-player
+// @description  Please check the GitHub link above. 请访问上方的GitHub链接查看说明。
+// @license      MIT © Aster Hours
 // @version      1.45
-// @description  [说明] 本脚本用 V 键切换右侧推荐抽屉(或在全屏模式上滑、「普通模式」视频区域点中键)；播放器居中、渐变背景、隐藏UI阻挡等。
 // @author       Aster
-// (c) 2025 Aster Hours — Released under the MIT License
 // @match        https://www.youtube.com/*
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js
