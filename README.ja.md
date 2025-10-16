@@ -2,8 +2,15 @@
 
 **[English](README.md)** · **[简体中文](README.zh-CN.md)** · **[繁體中文](README.zh-TW.md)** · **[日本語](README.ja.md)**
 
-軽量な Tampermonkey ユーザースクリプトです。YouTube の標準視聴ページをより没入的にし、  
-**コンテンツへ集中できるようにします。**
+<p align="center">
+  <img src="./example.png"
+       alt="YouTube Immersive Player – demo"
+       width="800"
+       style="max-width:100%; height:auto;">
+  <br>
+  <em>軽量な Tampermonkey ユーザースクリプトです。YouTube の標準視聴ページをより没入的にし、コンテンツへ集中できるようにします。</em>
+</p>
+
 
 ### 特長
 
