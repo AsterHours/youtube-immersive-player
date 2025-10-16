@@ -16,8 +16,8 @@
 
 ## 安装
 
-1) 安装浏览器扩展 ***[Tampermonkey](https://www.tampermonkey.net/)**
-2) 打开**[这个链接](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)**并确认安装（同时作为自动更新地址）：
+1) 安装浏览器扩展 **[Tampermonkey](https://www.tampermonkey.net/)**
+2) 打开[这个链接](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)并确认安装（同时作为自动更新地址）：
 
 ---
 
