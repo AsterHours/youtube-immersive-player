@@ -30,13 +30,14 @@
 ## 安装
 
 > 请先安装 **[Tampermonkey](https://www.tampermonkey.net/)**。  
-> 你大概率会从以下链接获取它：
+> 你大概率会从以下其中一个链接获取它：
 
+- **[篡改猴 - Edge浏览器扩展](https://microsoftedge.microsoft.com/addons/detail/%E7%AF%A1%E6%94%B9%E7%8C%B4/iikmkjmpaadaobahmlepeloendndfphd)**
 - **[Tampermonkey – Chrome 网上应用店](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)**
 - 🦊 **[Tampermonkey – Firefox 扩展](https://addons.mozilla.org/firefox/addon/tampermonkey/)**
 -  **[Tampermonkey – App Store](https://apps.apple.com/us/app/tampermonkey/id6738342400)**
 
-### A) Chromium 系（Chrome / Edge / Brave / Opera / Vivaldi）
+### A) Chrome（常见的国产浏览器 / Edge / Brave / Opera / Vivaldi）
 
 1. **打开扩展管理页**  
    - 右上角 **更多（三点） → 扩展程序 → 管理扩展程序**。
