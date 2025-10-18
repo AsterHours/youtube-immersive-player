@@ -17,10 +17,10 @@
 
 - Main video **centered**, with fade-in  
 - Avoid layout jank and visual clutter  
-- Hide recommended videos in **the** right drawer  
-- On the default watch page **and in fullscreen**: **press V** to toggle the right drawer  
+- Hide recommended videos in the right drawer  
+- On the default watch page and in fullscreen: **press V** to toggle the right drawer  
 - On the default watch page: **middle-click** the video to toggle the drawer  
-- Easy to toggle features in **the** userscript
+- Easy to toggle features in the userscript
 
 
 ### Privacy
