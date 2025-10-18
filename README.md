@@ -100,7 +100,7 @@ Otherwise, follow the steps below, **depending on your browser**:
 
 <br>
 
-### Changelog
+### Configuration
 - See [Releases](https://github.com/AsterHours/youtube-immersive-player/releases)
 
 ### Compatibility
