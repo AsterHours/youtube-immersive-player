@@ -94,7 +94,7 @@
 
 <br>
 
-### 変更履歴
+### 設定
 - [Releases](https://github.com/AsterHours/youtube-immersive-player/releases) を参照
 
 ### 互換性
