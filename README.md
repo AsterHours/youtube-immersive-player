@@ -1,41 +1,56 @@
-# YouTube Immersive Player (Reduce UI Clutter)
+<div align="center">
+  <h1>YouTube Immersive Player</h1>
 
-**[English](README.md)** · **[简体中文](README.zh-CN.md)** · **[繁體中文](README.zh-TW.md)** · **[日本語](README.ja.md)**
+  <p><strong><a href="README.md">English</a></strong> · <strong><a href="README.zh-CN.md">简体中文</a></strong> · <strong><a href="README.zh-TW.md">繁體中文</a></strong> · <strong><a href="README.ja.md">日本語</a></strong></p>
 
-<p align="center">
   <img src="./example.png"
        alt="YouTube Immersive Player – demo"
        width="800"
        style="max-width:100%; height:auto;">
   <br>
-  <em>A lightweight Tampermonkey userscript that makes YouTube’s default watch page more immersive, helps you focus on the content.</em>
-</p>
+  <em>A configurable userscript that reduces YouTube’s UI clutter and helps you focus on the content.</em>
+</div>
+
+<br><br>
 
 ### Features
 
-- Main video **centered** + **fade-in**
-- Avoid layout jank and visual clutter
-- Hide recommended videos in right drawer in landscape layouts
-- **Press V** to toggle the right drawer, **except** in theater mode
-- **Middle-Click on the video** to toggle the drawer on default watch view
+- Main video **centered**, with fade-in  
+- Avoid layout jank and visual clutter  
+- Hide recommended videos in **the** right drawer  
+- **Press V** to toggle the right drawer  
+- **Middle-click** the video to toggle the drawer  
+- Easy to toggle features in **the** userscript
 
 ### Privacy
 
-- The script runs locally in your browser  
-- No network requests, tracking, or data collection
+To function properly, the script requires enabling **Developer Mode** for your userscript extension.
+
+The script runs locally in your browser with no network requests, tracking, or data collection.
+
+<br>
 
 ---
 
-## Install
+<br>
+
+# Install
+
+If you **already use** userscripts, **[open this link to install the userscript](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)**.
+
+> After installation, **[go to a YouTube video](https://www.youtube.com/watch?v=az0J8O8wRU8)** and press **V**.  
+> On the default watch page, you can also **middle-click** the video to toggle the drawer.  
+> It should work <mark>**except**</mark> in theater mode and portrait layouts.
+
+Otherwise, follow the steps below, **depending on your browser**:
+
+<br><br>
+
+### A) Chromium-based browsers 
+(Chrome / Edge / Brave / Opera / Vivaldi)
 
 > Make sure **[Tampermonkey](https://www.tampermonkey.net/)** is installed first.  
-> You're likely gonna get it from one of these links:
-
-- **[Tampermonkey – Chrome Web Store](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)**
-- 🦊 **[Tampermonkey – Get this Extension for Firefox](https://addons.mozilla.org/firefox/addon/tampermonkey/)**
--  **[Tampermonkey on the App Store](https://apps.apple.com/us/app/tampermonkey/id6738342400)**
-
-### A) Chromium-based browsers (Chrome / Edge / Brave / Opera / Vivaldi)
+> You’ll likely get it from **[Tampermonkey – Chrome Web Store](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)**
 
 1. **Open your extensions page**  
    - At the top right, select **More (three dots) → Extensions → Manage extensions**.
@@ -44,22 +59,33 @@
    - Chrome users may use this direct link: **[chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo](chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo)**  
    > If internal links don’t open from GitHub, **copy and paste into the address bar**.
 
-3. **Turn on “Developer mode”** (usually top-right of the extensions page).
+3. **Turn on “Developer Mode”** (usually top-right of the extensions page).
 
-4. **Allow running userscripts on all sites** (in Tampermonkey’s Details):  
+4. **Allow running userscripts on all sites** (in Tampermonkey’s **Details** page):  
    - **Site access** → **On all sites**  
    - *(Optional)* **Allow in Incognito** if you want it in private windows
 
 5. **[Open this link to install the userscript](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)** and confirm in Tampermonkey.
 
-### B) Firefox
+<br><br>
+
+### B) 🦊 Firefox
+
+> Make sure **[Tampermonkey](https://www.tampermonkey.net/)** is installed first.  
+> You’ll likely get it from **[Tampermonkey – Get this Extension for Firefox](https://addons.mozilla.org/firefox/addon/tampermonkey/)**
 
 1. Open **Add-ons Manager** → **Extensions**: **[about:addons](about:addons)** → **Tampermonkey** → **Permissions**  
    - Ensure it can **access data for all websites** (default)  
    - *(Optional)* **Run in Private Windows** if desired
+
 2. **[Open this link to install the userscript](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)** and confirm in Tampermonkey.
 
-### C) Safari (macOS / iOS)
+<br><br>
+
+### C)  macOS / iOS Safari
+
+> Make sure **[Tampermonkey](https://www.tampermonkey.net/)** (or another userscript manager) is installed **first**.  
+> You’ll likely get it from **[Tampermonkey on the App Store](https://apps.apple.com/us/app/tampermonkey/id6738342400)**
 
 1. **macOS Safari:** Safari → **Settings** → **Extensions** → Enable **Tampermonkey**  
    - Click Tampermonkey → **Edit Websites** → Allow on **All Websites** (or add **[YouTube](https://www.youtube.com/)**)  
@@ -67,30 +93,22 @@
 2. **iOS/iPadOS Safari:** Settings app → **Safari** → **Extensions** → Enable **Tampermonkey** and allow Website Access  
 3. **[Open this link to install the userscript](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)** and confirm in Tampermonkey.
 
----
-
-After installation, **[go to a YouTube video](https://www.youtube.com/watch?v=az0J8O8wRU8)** and press **V** anywhere (works globally **except** in **theater mode** and **portrait layouts**).  
-On the default watch page, you can also **middle-click the video** to toggle the drawer.
+<br><br><br>
 
 ---
 
-## Compatibility
-
-- **Desktop browsers + Tampermonkey**
-- Tested on Chrome but it should work for all browsers.
-- **Works only in landscape, non-theater mode**
+<br>
 
 ### Changelog
+- See [Releases](https://github.com/AsterHours/youtube-immersive-player/releases)
 
-**v1.45**
-- Hide fullscreen quick actions/buttons
-- Change shortcut to **V** to match new YouTube default layout
-- Sidebar background → transparent-to-theme gradient
+### Compatibility
 
-### Known limitations
-
+- **Desktop browsers + Tampermonkey**
+- Tested on Chrome; it should work in other browsers as well.
+- **Works only in landscape, non-theater mode**
 - Theater mode and portrait layouts are intentionally out of scope  
-- Fullscreen “swipe up” is a **YouTube native** behavior (not part of the script)
+- Fullscreen “swipe up” is a **YouTube-native** behavior (not part of the script)
 
 ### Links
 
@@ -99,7 +117,7 @@ On the default watch page, you can also **middle-click the video** to toggle the
 - **[YouTube](https://www.youtube.com/)**  
 - **[Tampermonkey](https://www.tampermonkey.net/)**
 
----
+<br>
 
 ## License
 
