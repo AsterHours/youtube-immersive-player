@@ -1,97 +1,109 @@
-# YouTube Immersive Player（UI ノイズを削減）
+<div align="center">
+  <h1>YouTube Immersive Player</h1>
 
-**[English](README.md)** · **[简体中文](README.zh-CN.md)** · **[繁體中文](README.zh-TW.md)** · **[日本語](README.ja.md)**
+  <p><strong><a href="README.md">English</a></strong> · <strong><a href="README.zh-CN.md">简体中文</a></strong> · <strong><a href="README.zh-TW.md">繁體中文</a></strong> · <strong><a href="README.ja.md">日本語</a></strong></p>
 
-<p align="center">
   <img src="./example.png"
-       alt="YouTube Immersive Player – demo"
+       alt="YouTube Immersive Player – デモ"
        width="800"
        style="max-width:100%; height:auto;">
   <br>
-  <em>軽量な Tampermonkey ユーザースクリプトです。YouTube の標準視聴ページをより没入的にし、コンテンツへ集中できるようにします。</em>
-</p>
+  <em>YouTube の UI ノイズを減らし、コンテンツに集中できるようにする設定可能なユーザースクリプトです。</em>
+</div>
 
+<br><br>
 
 ### 特長
 
-- メイン動画を**中央寄せ**し、**フェードイン**で表示
-- レイアウトのガタつきと視覚的な雑音を抑制
-- 横向きレイアウトでは、右側のおすすめをドロワーに収納
-- **V キー**で右ドロワーをトグル（**シアターモードを除く**）
-- 標準の視聴ページでは、**動画上でミドルクリック**でもトグル可能
+- メイン動画を**中央配置**、フェードイン表示  
+- レイアウトのガタつき（jank）や視覚的ノイズを抑制  
+- **右側ドロワー**におすすめ動画を隠す  
+- 既定の視聴ページで：**V キー**で右ドロワーを切替  
+- 既定の視聴ページで：動画を**中クリック**してドロワーを切替  
+- ユーザースクリプト内の設定で**簡単に機能をオン/オフ**
 
 ### プライバシー
 
-- スクリプトはブラウザ内でローカルに実行  
-- ネットワークリクエスト、トラッキング、データ収集は一切なし
+正常に動作させるには、ユーザースクリプト拡張で **Developer Mode（開発者モード）** を有効にしてください。  
+本スクリプトはブラウザ上でローカルに動作し、**ネットワークリクエスト、トラッキング、データ収集は一切行いません**。
+
+<br>
 
 ---
 
-## インストール
+<br>
+
+# インストール
+
+すでにユーザースクリプトを**利用している**場合は、  
+**[こちらのリンクからスクリプトをインストール](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)** してください。
+
+> インストール後、**[任意の YouTube 動画ページ](https://www.youtube.com/watch?v=az0J8O8wRU8)** を開き、**V** を押してください。  
+> 既定の視聴ページでは、動画を**中クリック**してドロワーを切り替えることもできます。  
+> <mark>シアターモードと縦長レイアウト</mark> を除き、基本的に動作します。
+
+それ以外の場合は、お使いのブラウザに応じて以下の手順に従ってください。
+
+<br><br>
+
+### A) Chromium ベースのブラウザ  
+（Chrome / Edge / Brave / Opera / Vivaldi）
 
 > まず **[Tampermonkey](https://www.tampermonkey.net/)** をインストールしてください。  
-> 入手先の例：
+> 一般的には **[Chrome Web Store の Tampermonkey](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)** から入手できます。
 
-- **[Tampermonkey – Chrome ウェブストア](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)**
-- 🦊 **[Tampermonkey – Firefox アドオン](https://addons.mozilla.org/firefox/addon/tampermonkey/)**
--  **[Tampermonkey – App Store](https://apps.apple.com/us/app/tampermonkey/id6738342400)**
-
-### A) Chromium 系（Chrome / Edge / Brave / Opera / Vivaldi）
-
-1. **拡張機能のページを開く**  
-   - 右上の **その他（三点）→ 拡張機能 → 拡張機能を管理**。
-
-2. **Tampermonkey → 詳細** を開く  
-   - Chrome なら直接：**[chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo](chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo)**  
-   > GitHub から内部リンクが開けない場合は、**URL をコピーしてアドレスバーに貼り付け**てください。
-
-3. 拡張ページ右上の **「デベロッパーモード」** をオン。
-
-4. **全サイトでユーザースクリプトを実行できるよう許可**（Tampermonkey の詳細ページ）：  
+1. **拡張機能ページを開く**  
+   - 右上の **その他（三点） → 拡張機能 → 拡張機能を管理**。
+2. **Tampermonkey → 詳細（Details）を開く**  
+   - Chrome ユーザーは次のリンクを直接開けます：**[chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo](chrome://extensions/?id=dhdgffkkebhmkfjojejmpbldmpobfkfo)**  
+   > GitHub から内部リンクが開かない場合は、**アドレスバーにコピー＆ペースト**してください。
+3. **“Developer Mode” をオン**（拡張機能ページ右上あたり）
+4. **すべてのサイトでユーザースクリプトを許可**（Tampermonkey の詳細ページ）：  
    - **Site access** → **On all sites**  
-   - （任意）**Allow in Incognito**（シークレットウィンドウでの利用）
+   - *(任意)* **Allow in Incognito** を有効化するとシークレットウィンドウでも動作
+5. **[このリンクからスクリプトをインストール](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)** し、Tampermonkey で確認します。
 
-5. **[このリンクを開いてユーザースクリプトをインストール](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)** → Tampermonkey で承認。
+<br><br>
 
-### B) Firefox
+### B) 🦊 Firefox
 
-1. **アドオンマネージャ** → **拡張機能**：**[about:addons](about:addons)** → **Tampermonkey** → **Permissions**  
-   - **すべてのサイトのデータにアクセス** が許可されていることを確認（既定）  
-   - （任意）**プライベートウィンドウで実行** を許可
-2. **[ユーザースクリプトを開いてインストール](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)** → Tampermonkey で承認。
+> まず **[Tampermonkey](https://www.tampermonkey.net/)** をインストールしてください。  
+> **[Firefox アドオンの Tampermonkey](https://addons.mozilla.org/firefox/addon/tampermonkey/)** から入手できます。
 
-### C) Safari（macOS / iOS）
+1. **アドオンマネージャー** → **拡張機能**：**[about:addons](about:addons)** → **Tampermonkey** → **Permissions**  
+   - **すべての Web サイトのデータにアクセス**できることを確認（既定）  
+   - *(任意)* **Run in Private Windows** を有効化するとプライベートウィンドウでも動作
+2. **[このリンクからスクリプトをインストール](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)** し、Tampermonkey で確認します。
 
-1. **macOS Safari：**Safari → **設定** → **機能拡張** → **Tampermonkey** を有効化  
-   - Tampermonkey → **Web サイトを編集** → **すべての Web サイト** を許可（または **[YouTube](https://www.youtube.com/)** を追加）  
-   - （任意）**プライベートブラウズ**でも有効化
-2. **iOS/iPadOS Safari：**システムの **設定** → **Safari** → **機能拡張** → **Tampermonkey** を有効化し、Web サイトアクセスを許可  
-3. **[このリンクを開いてユーザースクリプトをインストール](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)** → Tampermonkey で承認。
+<br><br>
+
+### C)  macOS / iOS の Safari
+
+> まず **[Tampermonkey](https://www.tampermonkey.net/)**（または他のユーザースクリプトマネージャ）をインストールしてください。  
+> **[App Store の Tampermonkey](https://apps.apple.com/us/app/tampermonkey/id6738342400)** から入手できます。
+
+1. **macOS Safari：** Safari → **設定** → **機能拡張** → **Tampermonkey** を有効化  
+   - Tampermonkey → **Web サイトを編集（Edit Websites）** → **すべての Web サイト**を許可（あるいは **[YouTube](https://www.youtube.com/)** を追加）  
+   - *(任意)* **プライベートブラウズ**での許可を有効化  
+2. **iOS/iPadOS Safari：** 設定アプリ → **Safari** → **機能拡張** → **Tampermonkey** を有効化し、Web サイトアクセスを許可  
+3. **[このリンクからスクリプトをインストール](https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js)** し、Tampermonkey で確認します。
+
+<br><br><br>
 
 ---
 
-インストール後、**[任意の YouTube 動画](https://www.youtube.com/watch?v=az0J8O8wRU8)** を開き、**V** を押してドロワーを切り替え（**シアターモード**と**縦向きレイアウト**では無効）。  
-標準の視聴ページでは、**動画上でミドルクリック**でも切り替えられます。
-
----
-
-## 互換性
-
-- **デスクトップブラウザ + Tampermonkey**
-- Chrome で検証済み。基本的に他のブラウザでも動作する想定
-- **横向き・非シアターモードでのみ動作**
+<br>
 
 ### 変更履歴
+- [Releases](https://github.com/AsterHours/youtube-immersive-player/releases) を参照
 
-**v1.45**
-- フルスクリーンのクイックアクション/ボタンを非表示
-- ショートカットを **V** に変更（YouTube の新しい既定レイアウトに対応）
-- サイドバー背景を「透明 → テーマ色」のグラデーションに変更
+### 互換性
 
-### 既知の制限
-
-- シアターモードと縦向きレイアウトは対象外  
-- フルスクリーンの「上方向スワイプでおすすめ表示」は **YouTube のネイティブ機能**
+- **デスクトップブラウザ + Tampermonkey**
+- Chrome でテスト済み。他のモダンブラウザでも動作する見込みです。
+- **横向き・非シアターモードでのみ動作**  
+- シアターモードと縦長レイアウトは**対象外**  
+- 全画面での「上方向スワイプ」は **YouTube のネイティブ機能**（本スクリプトの動作ではありません）
 
 ### リンク
 
@@ -100,7 +112,7 @@
 - **[YouTube](https://www.youtube.com/)**  
 - **[Tampermonkey](https://www.tampermonkey.net/)**
 
----
+<br>
 
 ## ライセンス
 
