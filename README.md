@@ -18,8 +18,8 @@
 - Main video **centered**, with fade-in  
 - Avoid layout jank and visual clutter  
 - Hide recommended videos in the **right drawer**  
-- On the default watch page and in fullscreen: **press V** to toggle the right drawer  
-- On the default watch page: **middle-click** the video to toggle the drawer  
+- **press V** to toggle the right drawer  
+- **middle-click** the video to toggle the drawer  
 - Easy to toggle features in the userscript
 
 
@@ -41,7 +41,7 @@ If you **already use** userscripts, **[open this link to install the userscript]
 
 > After installation, **[go to a YouTube video](https://www.youtube.com/watch?v=az0J8O8wRU8)** and press **V**.  
 > On the default watch page, you can also **middle-click** the video to toggle the drawer.  
-> It should work <mark>**except**</mark> in theater mode and portrait layouts.
+> It should work <mark>**except**</mark> in portrait layouts.
 
 Otherwise, follow the steps below, **depending on your browser**:
 
@@ -107,8 +107,8 @@ Otherwise, follow the steps below, **depending on your browser**:
 
 - **Desktop browsers + Tampermonkey**
 - Tested on Chrome; it should work in other browsers as well.
-- **Works only in landscape, non-theater mode**
-- Theater mode and portrait layouts are intentionally out of scope  
+- Works only in landscape layout
+- Portrait layouts are intentionally out of scope  
 - Fullscreen “swipe up” is a **YouTube-native** behavior (not part of the script)
 
 ### Links
