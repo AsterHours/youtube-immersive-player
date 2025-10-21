@@ -3,7 +3,7 @@
 // @namespace    https://github.com/AsterHours/youtube-immersive-player
 // @description  Please check the GitHub link above. 请访问上方的GitHub链接查看说明。
 // @license      MIT © Aster Hours
-// @version      1.48
+// @version      1.49
 // @author       Aster
 // @match        https://www.youtube.com/*
 // @grant        none
@@ -18,6 +18,12 @@
   // CONFIG 用户设置区 / User Config Flags / 設定スイッチ
   // ==========================================================
   const CONFIG = {
+    // OPEN_RIGHT_ON_CHAPTER_BUTTON  <-- !NEW!
+    // EN: Clicking the in-player chapter title button (.ytp-chapter-title.ytp-button) opens the right drawer.
+    // ZH: 点击播放器内章节标题按钮（.ytp-chapter-title.ytp-button）时展开右侧抽屉。
+    // JA: プレーヤー内の章タイトルボタン（.ytp-chapter-title.ytp-button）クリックで右側ドロワーを開く。
+    OPEN_RIGHT_ON_CHAPTER_BUTTON: true,
+    
     // ENABLE_INLINE_RECS
     // EN: Enable the immersive right-panel behavior (hide by default, float drawer on normal mode).
     // ZH: 启用沉浸式右侧推荐栏（默认隐藏，普通模式可浮出抽屉）。
@@ -96,7 +102,7 @@
 
 
 
-    
+
   // ==========================================================
   // 常量与样式拼接 / Constants & CSS Assembly / 定数とCSS組み立て
   // ==========================================================
@@ -278,10 +284,27 @@
   // 切换/交互初始化 / Init Toggle & Interactions / トグル初期化
   // - 保留原有交互：中键 + V 键；不新增快捷键
   // - 离开 secondary 自动折叠（进入弹层时除外）
+  // - 新增：点击章节标题按钮时展开右侧抽屉（受开关控制）
   // ==========================================================
   function initToggle(secondary) {
     if (!secondary || secondary.dataset.tmBound) return;
     secondary.dataset.tmBound = '1';
+
+    // 点击播放器内的章节标题按钮 -> 展开右侧抽屉（仅普通模式）
+    document.addEventListener('click', (e) => {
+      if (!CONFIG.OPEN_RIGHT_ON_CHAPTER_BUTTON) return;
+      if (!CONFIG.ENABLE_INLINE_RECS || !CONFIG.ALLOW_RIGHT_ON_NORMAL) return;
+
+      const chapterBtn = e.target && e.target.closest?.('.ytp-chapter-title.ytp-button');
+      if (!chapterBtn) return;
+
+      const flexy = document.querySelector('ytd-watch-flexy');
+      if (!flexy || flexy.hasAttribute('theater') || flexy.hasAttribute('fullscreen')) return;
+
+      // 展开（不 toggle，避免误收起）
+      secondary.classList.toggle('show');
+      // 不阻止默认行为，保持 YouTube 自身动作
+    });
 
     // 中键点击视频 -> 切换右侧栏
     if (CONFIG.TOGGLE_WITH_MMB_ON_VIDEO) {
