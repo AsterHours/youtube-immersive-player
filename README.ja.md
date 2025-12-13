@@ -108,7 +108,7 @@
 ### リンク
 
 - プロジェクト：**[GitHub Repository](https://github.com/AsterHours/youtube-immersive-player)**  
-- 作者：**[Aster](https://github.com/AsterHours)**  
+- 作者：**[aste](https://github.com/AsterHours)**  
 - **[YouTube](https://www.youtube.com/)**  
 - **[Tampermonkey](https://www.tampermonkey.net/)**
 
@@ -116,7 +116,10 @@
 
 ## ライセンス
 
-This project is licensed under the Apache License, Version 2.0.
-See the LICENSE file for details.
-YouTube Immersive Player
+YouTube Immersive Player 
+
 Copyright © 2025 AsterHours
+
+This project is licensed under the Apache License, Version 2.0. 
+
+See the LICENSE file for details. 
