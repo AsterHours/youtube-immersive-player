@@ -114,7 +114,7 @@ Otherwise, follow the steps below, **depending on your browser**:
 ### Links
 
 - Project home: **[GitHub Repository](https://github.com/AsterHours/youtube-immersive-player)**  
-- Author: **[Aster](https://github.com/AsterHours)**  
+- Author: **[aste](https://github.com/AsterHours)**  
 - **[YouTube](https://www.youtube.com/)**  
 - **[Tampermonkey](https://www.tampermonkey.net/)**
 
@@ -123,7 +123,9 @@ Otherwise, follow the steps below, **depending on your browser**:
 ## License
 
 YouTube Immersive Player
+
 Copyright © 2025 AsterHours
 
 This project is licensed under the Apache License, Version 2.0.
+
 See the LICENSE file for details.
