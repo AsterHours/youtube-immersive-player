@@ -108,7 +108,7 @@
 ### 链接
 
 - 项目主页：**[GitHub 仓库](https://github.com/AsterHours/youtube-immersive-player)**  
-- 作者：**[Aster](https://github.com/AsterHours)**  
+- 作者：**[aste](https://github.com/AsterHours)**  
 - **[YouTube](https://www.youtube.com/)**  
 - **[Tampermonkey](https://www.tampermonkey.net/)**
 
