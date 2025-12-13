@@ -2,9 +2,9 @@
 // @name         YouTube Immersive Player | YouTube沉浸式播放器
 // @namespace    https://github.com/AsterHours/youtube-immersive-player
 // @description  Please check the GitHub link above. 请访问上方的GitHub链接查看说明。
-// @license      MIT © Aster Hours
+// @license      Apache License Version 2.0 © AsterHours
 // @version      1.55
-// @author       Aster
+// @author       aste (AsterHours)
 // @match        https://www.youtube.com/*
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/AsterHours/youtube-immersive-player/main/youtube-immersive-player.user.js
@@ -98,22 +98,23 @@
 
 
 
+/*
+ * Copyright 2025 AsterHours
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
     
   // ==========================================================
   // Style assembly / 样式拼接 / スタイル組立
