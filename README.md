@@ -122,4 +122,7 @@ Otherwise, follow the steps below, **depending on your browser**:
 
 ## License
 
-MIT © Aster Hours
+This project is licensed under the Apache License, Version 2.0.
+See the LICENSE file for details.
+YouTube Immersive Player
+Copyright © 2025 AsterHours
