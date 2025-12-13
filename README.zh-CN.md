@@ -117,7 +117,9 @@
 ## 许可证
 
 YouTube Immersive Player
+
 Copyright © 2025 AsterHours
 
 This project is licensed under the Apache License, Version 2.0.
+
 See the LICENSE file for details.
