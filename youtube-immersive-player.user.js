@@ -3,7 +3,7 @@
 // @namespace    https://github.com/AsterHours/youtube-immersive-player
 // @description  Please check the GitHub link above. 请访问上方的GitHub链接查看说明。
 // @license      MIT © Aster Hours
-// @version      1.57
+// @version      1.58
 // @author       Aster
 // @match        https://www.youtube.com/*
 // @grant        none
@@ -40,23 +40,42 @@
 
   if (CONFIG.ENABLE_INLINE_RECS) {
     css += `
-
       #secondary { display: none !important; }
 
-      ${CONFIG.ALLOW_RIGHT_ON_NORMAL ? `
+      #secondary yt-lockup-view-model {
+        display: flex !important;
+      }
+      #secondary #items,
+      #secondary ytd-watch-next-secondary-results-renderer {
+        scrollbar-width: none !important;
+      }
 
+      #secondary #items::-webkit-scrollbar,
+      #secondary ytd-watch-next-secondary-results-renderer::-webkit-scrollbar {
+        display: none !important;
+      }
+      #secondary .yt-lockup-view-model__content-image {
+        flex: 0 0 200px !important;
+        width: 200px !important;
+        max-width: 200px !important;
+      }
+      #secondary {
+        overflow: hidden !important;
+      }
+
+      ${CONFIG.ALLOW_RIGHT_ON_NORMAL ? `
       ytd-watch-flexy:not([theater]):not([fullscreen]) #secondary {
         display: block !important;
         position: absolute !important;
         top: var(--tm-ytright-top, 56px) !important;
         right: 0 !important;
-        width: min(420px, 38vw) !important;
+        width: min(420px, 38.2vw) !important;
         height: calc(100% - var(--tm-ytright-top, 56px)) !important;
         background: linear-gradient(
           to right,
           rgba(0,0,0,0) 0%,
-          var(--yt-spec-general-background-a, #0f0f0f) 10%,
-          var(--yt-spec-general-background-a, #0f0f0f) 100%
+          var(--yt-spec-base-background) 12%,
+          var(--yt-spec-base-background) 100%
         ) !important;
         overflow-y: auto !important;
         opacity: 0 !important;
@@ -80,7 +99,7 @@
         justify-content: center !important;
       }
       ytd-watch-flexy:not([theater]):not([fullscreen]) video.video-stream {
-        position: relative !important; 
+        position: relative !important;
         left: 0 !important;
         right: 0 !important;
         margin: 0 auto !important;
@@ -95,13 +114,13 @@
         position: fixed !important;
         top: var(--tm-ytright-top, 56px) !important;
         right: 0 !important;
-        width: min(420px, 36vw) !important;
+        width: min(420px, 38.2vw) !important;
         height: calc(100% - var(--tm-ytright-top, 56px)) !important;
         background: linear-gradient(
           to right,
           rgba(0,0,0,0) 0%,
-          var(--yt-spec-general-background-a, #0f0f0f) 10%,
-          var(--yt-spec-general-background-a, #0f0f0f) 100%
+          var(--yt-spec-base-background) 12%,
+          var(--yt-spec-base-background) 100%
         ) !important;
         overflow-y: auto !important;
         opacity: 0 !important;
@@ -124,7 +143,7 @@
     `;
   }
 
-  
+
   if (CONFIG.HIDE_ALL_BEZELS) {
     css += `#movie_player .ytp-bezel { display: none !important; }`;
   } else if (CONFIG.HIDE_PLAY_PAUSE_BEZEL) {
