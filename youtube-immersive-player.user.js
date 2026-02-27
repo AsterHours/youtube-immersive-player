@@ -3,7 +3,7 @@
 // @namespace    https://github.com/AsterHours/youtube-immersive-player
 // @description  Please check the GitHub link above. 请访问上方的GitHub链接查看说明。
 // @license      MIT © Aster Hours
-// @version      1.56
+// @version      1.57
 // @author       Aster
 // @match        https://www.youtube.com/*
 // @grant        none
@@ -40,11 +40,11 @@
 
   if (CONFIG.ENABLE_INLINE_RECS) {
     css += `
-      /* 保持默认隐藏避免闪烁 */
+
       #secondary { display: none !important; }
 
       ${CONFIG.ALLOW_RIGHT_ON_NORMAL ? `
-      /* 普通模式：维持你原始的压缩比例 (100% - 350px) */
+
       ytd-watch-flexy:not([theater]):not([fullscreen]) #secondary {
         display: block !important;
         position: absolute !important;
@@ -69,20 +69,18 @@
         pointer-events: auto !important;
       }
 
-      /* 关键：维持主区域压缩，不放大播放器 */
       ytd-watch-flexy:not([theater]):not([fullscreen]) #primary {
+        flex: 0 0 calc(100% - min(420px, 38vw)) !important;
         margin: 0 auto !important;
-        max-width: calc(100% - 350px) !important;
       }
       ytd-watch-flexy:not([theater]):not([fullscreen]).ready #primary { opacity: 1 !important; }
 
-      /* 核心修复：强制视频流在容器内水平居中，解决竖屏偏右问题 */
       ytd-watch-flexy:not([theater]):not([fullscreen]) .html5-video-container {
         display: flex !important;
         justify-content: center !important;
       }
       ytd-watch-flexy:not([theater]):not([fullscreen]) video.video-stream {
-        position: relative !important; /* 改为相对定位以配合 flex 居中 */
+        position: relative !important; 
         left: 0 !important;
         right: 0 !important;
         margin: 0 auto !important;
@@ -126,7 +124,7 @@
     `;
   }
 
-  // 保持原有 Bezel 逻辑
+  
   if (CONFIG.HIDE_ALL_BEZELS) {
     css += `#movie_player .ytp-bezel { display: none !important; }`;
   } else if (CONFIG.HIDE_PLAY_PAUSE_BEZEL) {
@@ -153,7 +151,7 @@
     `;
   }
 
-  // 后续 JS 逻辑保持不变...
+
   function injectStyle() {
     if (!document.getElementById(STYLE_ID)) {
       const el = document.createElement('style');
