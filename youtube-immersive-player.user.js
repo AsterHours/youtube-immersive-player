@@ -3,7 +3,7 @@
 // @namespace    https://github.com/AsterHours/youtube-immersive-player
 // @description  Please check the GitHub link above. 请访问上方的GitHub链接查看说明。
 // @license      MIT © Aster Hours
-// @version      1.58
+// @version      1.60
 // @author       Aster
 // @match        https://www.youtube.com/*
 // @grant        none
@@ -18,21 +18,38 @@
   // CONFIG 用户设置区 / User Config / 設定
   // ==========================================================
   const CONFIG = {
-    ENABLE_INLINE_RECS: true,
-    ALLOW_RIGHT_ON_NORMAL: true,
-    ALLOW_RIGHT_ON_THEATER: true,
-    TOGGLE_WITH_MMB_ON_VIDEO: true,
-    TOGGLE_WITH_V_KEY: true,
-    AUTO_HIDE_SECONDARY_ON_LEAVE: true,
-    KEEP_SECONDARY_WHEN_OVER_POPUP: true,
-    HIDE_PLAY_PAUSE_BEZEL: true,
-    HIDE_ALL_BEZELS: false,
-    FIX_POPUP_MENU_ON_TOP: true,
-    OPEN_RIGHT_ON_CHAPTER_BUTTON: true,
-    MMB_ACTS_AS_V_IN_FULLSCREEN: true,
+    RESIZE_WITH_R_KEY: true,              // 允许按 R 键切换主播放器宽度比例 (按下R键后适配Macbook屏幕)
+    TOGGLE_WITH_V_KEY: true,              // 允许按下 V 键来显示/隐藏右侧推荐栏
+    TOGGLE_WITH_MMB_ON_VIDEO: true,       // 允许在视频区域点击鼠标中键来显示/隐藏右侧推荐栏
+    MMB_ACTS_AS_V_IN_FULLSCREEN: true,    // 允许在全屏模式点击鼠标中键来显示/隐藏底部推荐栏
+
+    ENABLE_INLINE_RECS: true,             // 将侧边栏样式修改为覆盖在主界面图层之上
+    ALLOW_RIGHT_ON_NORMAL: true,          // 允许在普通播放模式下使用推荐栏
+    ALLOW_RIGHT_ON_THEATER: true,         // 允许在剧场宽屏模式下使用推荐栏
+    AUTO_HIDE_SECONDARY_ON_LEAVE: true,   // 当鼠标离开右侧推荐栏区域时，自动隐藏
+    KEEP_SECONDARY_WHEN_OVER_POPUP: true, // 当鼠标悬停在推荐栏上下文菜单时，不自动隐藏
+
+    HIDE_PLAY_PAUSE_BEZEL: true,          // 隐藏视频中间哎哟我去怎么这么大的巨大的播放/暂停状态动画图标
+    HIDE_ALL_BEZELS: false,               // 隐藏视频中间正常人大小的状态动画图标（音量等，默认不隐藏）
+
+    FIX_POPUP_MENU_ON_TOP: true,          // 确保上下文菜单始终显示在最顶层防遮挡
+    OPEN_RIGHT_ON_CHAPTER_BUTTON: true,   // 允许点击视频进度条上的章节标题按钮时展开右侧推荐栏
   };
 
   const STYLE_ID = 'tm-youtube-inline-recommend-style-v1-55';
+
+  // 从 localStorage 读取状态，如果有记录且为 'true'，则默认开启，否则为 false
+  let isPrimaryResized = localStorage.getItem('yt_immersive_primary_resized') === 'true';
+
+  // 封装更新宽度的逻辑，并在初始化时立即执行一次，确保跨页面保持状态
+  function updatePrimaryWidth() {
+    const newWidth = isPrimaryResized
+      ? 'calc(100% - min(420px, 38vw) / 1.5)'
+      : 'calc(100% - min(420px, 38vw))';
+    document.documentElement.style.setProperty('--tm-primary-width', newWidth);
+  }
+  updatePrimaryWidth();
+
 
   let css = `
     html, body { overflow-x: hidden !important; }
@@ -89,8 +106,9 @@
       }
 
       ytd-watch-flexy:not([theater]):not([fullscreen]) #primary {
-        flex: 0 0 calc(100% - min(420px, 38vw)) !important;
+        flex: 0 0 var(--tm-primary-width, calc(100% - min(420px, 38vw))) !important;
         margin: 0 auto !important;
+        /* 取消此处的 transition，防止 YouTube JS 计算高度时产生延迟错位 */
       }
       ytd-watch-flexy:not([theater]):not([fullscreen]).ready #primary { opacity: 1 !important; }
 
@@ -278,17 +296,43 @@
       }
     });
 
-    if (CONFIG.TOGGLE_WITH_V_KEY) {
-      document.addEventListener('keydown', (e) => {
-        const t = e.target;
-        if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
-        if (!e.key || e.key.toLowerCase() !== 'v') return;
+    // 键盘监听事件合并 (同时处理 V 键和 R 键逻辑)
+    document.addEventListener('keydown', (e) => {
+      const t = e.target;
+      // 避免在输入框中触发快捷键
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+
+      // 【修复Bug】如果按下了修饰键 (Ctrl, Alt/Option, Meta/Cmd)，则直接退出，防止和系统/浏览器快捷键冲突
+      if (e.ctrlKey || e.altKey || e.metaKey) return;
+
+      if (!e.key) return;
+
+      const key = e.key.toLowerCase();
+
+      // V键逻辑
+      if (key === 'v' && CONFIG.TOGGLE_WITH_V_KEY) {
         const flexy = document.querySelector('ytd-watch-flexy');
         const isFullscreen = !!(flexy && flexy.hasAttribute('fullscreen')) || !!document.fullscreenElement;
         if (isFullscreen) return;
         performVToggle(secondary);
-      });
-    }
+      }
+
+      // R键逻辑
+      if (key === 'r' && CONFIG.RESIZE_WITH_R_KEY) {
+        isPrimaryResized = !isPrimaryResized;
+
+        // 🌟 修改点 3：每次按下 R 键切换后，将当前状态保存到 localStorage 中
+        localStorage.setItem('yt_immersive_primary_resized', isPrimaryResized);
+
+        // 应用新宽度
+        updatePrimaryWidth();
+
+        // 强制派发全局 resize 事件，通知 YouTube 的 JS 重新计算视频流的高度与宽度
+        window.dispatchEvent(new Event('resize'));
+        // 双重保险：稍微延迟再次触发，确保 YouTube 的播放器容器响应完毕
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
+      }
+    });
 
     if (CONFIG.AUTO_HIDE_SECONDARY_ON_LEAVE) {
       secondary.addEventListener('mouseleave', (e) => {
