@@ -3,7 +3,7 @@
 // @namespace    https://github.com/AsterHours/youtube-immersive-player
 // @description  Please check the GitHub link above. 请访问上方的GitHub链接查看说明。
 // @license      MIT © Aster Hours
-// @version      1.60
+// @version      1.61
 // @author       Aster
 // @match        https://www.youtube.com/*
 // @grant        none
@@ -19,6 +19,7 @@
   // ==========================================================
   const CONFIG = {
     RESIZE_WITH_R_KEY: true,              // 允许按 R 键切换主播放器宽度比例 (按下R键后适配Macbook屏幕)
+    REDIRECT_SHORTS_WITH_R_KEY: true,     // 允许在 Shorts 页面按 R 键跳转到普通视频播放页面
     TOGGLE_WITH_V_KEY: true,              // 允许按下 V 键来显示/隐藏右侧推荐栏
     TOGGLE_WITH_MMB_ON_VIDEO: true,       // 允许在视频区域点击鼠标中键来显示/隐藏右侧推荐栏
     MMB_ACTS_AS_V_IN_FULLSCREEN: true,    // 允许在全屏模式点击鼠标中键来显示/隐藏底部推荐栏
@@ -318,19 +319,31 @@
       }
 
       // R键逻辑
-      if (key === 'r' && CONFIG.RESIZE_WITH_R_KEY) {
-        isPrimaryResized = !isPrimaryResized;
+      if (key === 'r') {
+        // 先检查是否处于 Shorts 页面并需要跳转
+        if (CONFIG.REDIRECT_SHORTS_WITH_R_KEY && window.location.pathname.startsWith('/shorts/')) {
+          const videoId = window.location.pathname.split('/shorts/')[1];
+          if (videoId) {
+            window.location.href = '/watch?v=' + videoId;
+          }
+          return; // 结束逻辑，不再执行后续的调整比例
+        }
 
-        // 🌟 修改点 3：每次按下 R 键切换后，将当前状态保存到 localStorage 中
-        localStorage.setItem('yt_immersive_primary_resized', isPrimaryResized);
+        // 正常播放页面的调整比例逻辑
+        if (CONFIG.RESIZE_WITH_R_KEY) {
+          isPrimaryResized = !isPrimaryResized;
 
-        // 应用新宽度
-        updatePrimaryWidth();
+          // 每次按下 R 键切换后，将当前状态保存到 localStorage 中
+          localStorage.setItem('yt_immersive_primary_resized', isPrimaryResized);
 
-        // 强制派发全局 resize 事件，通知 YouTube 的 JS 重新计算视频流的高度与宽度
-        window.dispatchEvent(new Event('resize'));
-        // 双重保险：稍微延迟再次触发，确保 YouTube 的播放器容器响应完毕
-        setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
+          // 应用新宽度
+          updatePrimaryWidth();
+
+          // 强制派发全局 resize 事件，通知 YouTube 的 JS 重新计算视频流的高度与宽度
+          window.dispatchEvent(new Event('resize'));
+          // 双重保险：稍微延迟再次触发，确保 YouTube 的播放器容器响应完毕
+          setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
+        }
       }
     });
 
