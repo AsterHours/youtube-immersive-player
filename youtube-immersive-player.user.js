@@ -3,7 +3,7 @@
 // @namespace    https://github.com/AsterHours/youtube-immersive-player
 // @description  Please check the GitHub link above. 请访问上方的GitHub链接查看说明。
 // @license      MIT © Aster Hours
-// @version      1.61
+// @version      1.62
 // @author       Aster
 // @match        https://www.youtube.com/*
 // @grant        none
@@ -18,9 +18,14 @@
   // CONFIG 用户设置区 / User Config / 設定
   // ==========================================================
   const CONFIG = {
-    RESIZE_WITH_R_KEY: true,              // 允许按 R 键切换主播放器宽度比例 (按下R键后适配Macbook屏幕)
-    REDIRECT_SHORTS_WITH_R_KEY: true,     // 允许在 Shorts 页面按 R 键跳转到普通视频播放页面
-    TOGGLE_WITH_V_KEY: true,              // 允许按下 V 键来显示/隐藏右侧推荐栏
+    // ================= [ 快捷键 Shortcuts ] ==================
+    HOTKEY_RESIZE_PLAYER: 'r',            // 切换主播放器宽度/跳转Shorts的快捷键 (默认 'r')
+    HOTKEY_TOGGLE_SECONDARY: 'v',         // 显示/隐藏右侧推荐栏的快捷键 (默认 'v')
+    // ========================================================
+
+    RESIZE_WITH_R_KEY: true,              // 允许按快捷键(默认 'r')切换主播放器宽度比例
+    REDIRECT_SHORTS_WITH_R_KEY: true,     // 允许按快捷键(默认 'r')在 Shorts 页面跳转到普通视频播放页面
+    TOGGLE_WITH_V_KEY: true,              // 允许按快捷键(默认 'v')来显示/隐藏右侧推荐栏
     TOGGLE_WITH_MMB_ON_VIDEO: true,       // 允许在视频区域点击鼠标中键来显示/隐藏右侧推荐栏
     MMB_ACTS_AS_V_IN_FULLSCREEN: true,    // 允许在全屏模式点击鼠标中键来显示/隐藏底部推荐栏
 
@@ -30,7 +35,7 @@
     AUTO_HIDE_SECONDARY_ON_LEAVE: true,   // 当鼠标离开右侧推荐栏区域时，自动隐藏
     KEEP_SECONDARY_WHEN_OVER_POPUP: true, // 当鼠标悬停在推荐栏上下文菜单时，不自动隐藏
 
-    HIDE_PLAY_PAUSE_BEZEL: true,          // 隐藏视频中间哎哟我去怎么这么大的巨大的播放/暂停状态动画图标
+    HIDE_PLAY_PAUSE_BEZEL: true,          // 隐藏视频中间哎哟我去怎么这么大的播放/暂停状态动画图标
     HIDE_ALL_BEZELS: false,               // 隐藏视频中间正常人大小的状态动画图标（音量等，默认不隐藏）
 
     FIX_POPUP_MENU_ON_TOP: true,          // 确保上下文菜单始终显示在最顶层防遮挡
@@ -244,7 +249,7 @@
     return !!target.closest(`#secondary, ytd-compact-video-renderer, a.ytp-endscreen-content, .ytp-endscreen-content, .ytp-videowall-still, .ytp-modern-videowall-still, .ytp-videowall-content, .ytp-suggestion-panel, .ytp-suggestion-set, .ytp-ce-element, .ytp-miniplayer-suggestion, .ytp-relatedthumb-link`.replace(/\n/g, ' '));
   }
 
-  function sendKeyVToPlayer() {
+  function sendToggleKeyToPlayer() {
     const targets = [];
     const movie = document.getElementById('movie_player');
     const video = document.querySelector('video.video-stream');
@@ -252,7 +257,12 @@
     if (movie) targets.push(movie);
     if (video) targets.push(video);
     targets.push(document.body, document);
-    const opts = { key: 'v', code: 'KeyV', keyCode: 86, which: 86, bubbles: true, cancelable: true };
+
+    const keyStr = (CONFIG.HOTKEY_TOGGLE_SECONDARY || 'v').toLowerCase();
+    const keyCode = keyStr.toUpperCase().charCodeAt(0);
+    const codeStr = 'Key' + keyStr.toUpperCase();
+
+    const opts = { key: keyStr, code: codeStr, keyCode: keyCode, which: keyCode, bubbles: true, cancelable: true };
     for (const t of targets) { try { t.dispatchEvent(new KeyboardEvent('keydown', opts)); } catch (_) {} }
     for (const t of targets) { try { t.dispatchEvent(new KeyboardEvent('keyup',   opts)); } catch (_) {} }
   }
@@ -284,7 +294,7 @@
       if (isFullscreen && CONFIG.MMB_ACTS_AS_V_IN_FULLSCREEN) {
         if (!isRecommendedTarget(e.target)) {
           e.preventDefault();
-          sendKeyVToPlayer();
+          sendToggleKeyToPlayer();
         }
         return;
       }
@@ -297,7 +307,7 @@
       }
     });
 
-    // 键盘监听事件合并 (同时处理 V 键和 R 键逻辑)
+    // 键盘监听事件合并 (处理自定义快捷键逻辑)
     document.addEventListener('keydown', (e) => {
       const t = e.target;
       // 避免在输入框中触发快捷键
@@ -309,17 +319,19 @@
       if (!e.key) return;
 
       const key = e.key.toLowerCase();
+      const toggleKey = (CONFIG.HOTKEY_TOGGLE_SECONDARY || 'v').toLowerCase();
+      const resizeKey = (CONFIG.HOTKEY_RESIZE_PLAYER || 'r').toLowerCase();
 
-      // V键逻辑
-      if (key === 'v' && CONFIG.TOGGLE_WITH_V_KEY) {
+      // 切换侧边栏逻辑 (原V键)
+      if (key === toggleKey && CONFIG.TOGGLE_WITH_V_KEY) {
         const flexy = document.querySelector('ytd-watch-flexy');
         const isFullscreen = !!(flexy && flexy.hasAttribute('fullscreen')) || !!document.fullscreenElement;
         if (isFullscreen) return;
         performVToggle(secondary);
       }
 
-      // R键逻辑
-      if (key === 'r') {
+      // 切换宽度/跳转Shorts逻辑 (原R键)
+      if (key === resizeKey) {
         // 先检查是否处于 Shorts 页面并需要跳转
         if (CONFIG.REDIRECT_SHORTS_WITH_R_KEY && window.location.pathname.startsWith('/shorts/')) {
           const videoId = window.location.pathname.split('/shorts/')[1];
@@ -333,7 +345,7 @@
         if (CONFIG.RESIZE_WITH_R_KEY) {
           isPrimaryResized = !isPrimaryResized;
 
-          // 每次按下 R 键切换后，将当前状态保存到 localStorage 中
+          // 每次按下快捷键切换后，将当前状态保存到 localStorage 中
           localStorage.setItem('yt_immersive_primary_resized', isPrimaryResized);
 
           // 应用新宽度
